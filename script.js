@@ -109,4 +109,10 @@ const GameController = (() => {
 })();
 
 // Display Controller Module (IIFE) - Handles UI Updates
-const DisplayController = (() => {})();
+const DisplayController = (() => {
+  const board = document.querySelector(".board");
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+    cell.addEventListener("click", GameController.playRound());
+  });
+})();
