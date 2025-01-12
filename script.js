@@ -58,8 +58,8 @@ const GameController = (() => {
         winner = "Draw";
       }
       switchPlayer();
-      printBoard();
     }
+    return Gameboard.getBoard();
   };
 
   const checkDraw = () => {
@@ -75,10 +75,6 @@ const GameController = (() => {
       }
     }
     return true;
-  };
-
-  const printBoard = () => {
-    console.log(Gameboard.getBoard());
   };
 
   const checkWin = (mark) => {
