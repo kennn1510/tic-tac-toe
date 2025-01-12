@@ -42,6 +42,7 @@ const GameController = (() => {
       Gameboard.placeMark(row, column, currentPlayer.getMark());
       if (checkWin(currentPlayer.getMark())) {
         gameOver = true;
+        console.log(`${currentPlayer.getName()} has won!`);
       }
       switchPlayer();
     }
@@ -50,14 +51,20 @@ const GameController = (() => {
   const checkWin = (mark) => {
     const board = Gameboard.getBoard();
 
-    for (let row = 0; row < 3; row++) {
-      if (
-        board[row][0] === mark &&
-        board[row][1] === mark &&
-        board[row][2] === mark
-      )
+    for (let i = 0; i < 3; i++) {
+      // Check 3 in a row
+      if (board[i][0] === mark && board[i][1] === mark && board[i][2] === mark)
+        return true;
+      // Check 3 in a column
+      if (board[0][i] === mark && board[1][i] === mark && board[2][i] === mark)
         return true;
     }
+    // Check top-left to bottom-right
+    if (board[0][0] === mark && board[1][1] === mark && board[2][2] === mark)
+      return true;
+    // Check bottom-left to top-right
+    if (board[2][0] === mark && board[1][1] === mark && board[0][2] === mark)
+      return true;
 
     return false;
   };
