@@ -39,6 +39,7 @@ const GameController = (() => {
   const playerX = Player("playerX", "X");
   const playerO = Player("playerO", "O");
   let currentPlayer = playerX;
+  let winner = null;
   let gameOver = false;
 
   const switchPlayer = () => {
@@ -50,10 +51,34 @@ const GameController = (() => {
       Gameboard.placeMark(row, column, currentPlayer.getMark());
       if (checkWin(currentPlayer.getMark())) {
         gameOver = true;
-        console.log(`${currentPlayer.getName()} has won!`);
+        winner = currentPlayer.getName();
+      }
+      if (winner === null && checkDraw()) {
+        gameOver = true;
+        winner = "Draw";
       }
       switchPlayer();
+      printBoard();
     }
+  };
+
+  const checkDraw = () => {
+    const board = Gameboard.getBoard();
+    // Check each cell to see if it is either X or O
+    // After, check if any player has won?
+    // if not, then it is a draw
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] !== "X" || board[i][j] !== "O") {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
+  const printBoard = () => {
+    console.log(Gameboard.getBoard());
   };
 
   const checkWin = (mark) => {
@@ -81,6 +106,7 @@ const GameController = (() => {
     Gameboard.resetBoard();
     currentPlayer = playerX;
     gameOver = false;
+    winner = null;
   };
 
   return { playRound, resetGame };
