@@ -14,7 +14,15 @@ const Gameboard = (() => {
     }
   };
 
-  return { getBoard, placeMark };
+  const resetBoard = () => {
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        board[i][j] = "";
+      }
+    }
+  };
+
+  return { getBoard, placeMark, resetBoard };
 })();
 
 // Player Factory - Since we need multiple players
@@ -69,9 +77,13 @@ const GameController = (() => {
     return false;
   };
 
-  const resetGame = () => {};
+  const resetGame = () => {
+    Gameboard.resetBoard();
+    currentPlayer = playerX;
+    gameOver = false;
+  };
 
-  return { playRound };
+  return { playRound, resetGame };
 })();
 
 // Display Controller Module (IIFE) - Handles UI Updates
