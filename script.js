@@ -129,10 +129,7 @@ const DisplayController = (() => {
     });
   };
 
-  const helloWorld = (event) => {
-    console.log(
-      `Row: ${event.target.dataset.row} and Column: ${event.target.dataset.col}`
-    );
+  const playRoundOnCell = (event) => {
     GameController.playRound(
       event.target.dataset.row,
       event.target.dataset.col
@@ -142,7 +139,7 @@ const DisplayController = (() => {
   const addClickEventToAllCells = (() => {
     cells.forEach((cell) => {
       cell.addEventListener("click", (e) => {
-        helloWorld(e);
+        playRoundOnCell(e);
       });
     });
   })();
