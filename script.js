@@ -116,6 +116,7 @@ const DisplayController = (() => {
 
   const displayBoard = () => {
     const gameBoard = Gameboard.getBoard();
+    const cells = document.querySelectorAll(".cell");
 
     let rowCounter = 0;
     let colCounter = 0;
@@ -127,6 +128,24 @@ const DisplayController = (() => {
       }
     });
   };
+
+  const helloWorld = (event) => {
+    console.log(
+      `Row: ${event.target.dataset.row} and Column: ${event.target.dataset.col}`
+    );
+    GameController.playRound(
+      event.target.dataset.row,
+      event.target.dataset.col
+    );
+  };
+
+  const addClickEventToAllCells = (() => {
+    cells.forEach((cell) => {
+      cell.addEventListener("click", (e) => {
+        helloWorld(e);
+      });
+    });
+  })();
 
   return { displayBoard };
 })();
