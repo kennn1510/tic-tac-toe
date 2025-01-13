@@ -1,9 +1,9 @@
 // Gameboard Module (IIFE) - Since we only need one gameboard
 const Gameboard = (() => {
   const board = [
-    ["X", "O", "X"],
-    ["X", "O", "O"],
-    ["O", "O", "X"],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
   ];
 
   const getBoard = () => board;
@@ -58,6 +58,7 @@ const GameController = (() => {
         winner = "Draw";
       }
       switchPlayer();
+      DisplayController.displayBoard();
     }
     return Gameboard.getBoard();
   };
@@ -103,6 +104,7 @@ const GameController = (() => {
     currentPlayer = playerX;
     gameOver = false;
     winner = null;
+    DisplayController.displayBoard();
   };
 
   return { playRound, resetGame };
@@ -110,11 +112,8 @@ const GameController = (() => {
 
 // Display Controller Module (IIFE) - Handles UI Updates
 const DisplayController = (() => {
-  const board = document.querySelector(".board");
   const cells = document.querySelectorAll(".cell");
-  // cells.forEach((cell) => {
-  //   cell.addEventListener("click", GameController.playRound());
-  // });
+
   const displayBoard = () => {
     const gameBoard = Gameboard.getBoard();
 
@@ -131,4 +130,3 @@ const DisplayController = (() => {
 
   return { displayBoard };
 })();
-DisplayController.displayBoard();

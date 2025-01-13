@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
   height: 100vh;
   margin: 0;
 }
@@ -7,7 +11,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  height: 100%;
+  width: 50vw;
+  height: 50vh;
 }
 
 .cell {
