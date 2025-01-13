@@ -3,7 +3,7 @@ body {
   margin: 0;
 }
 
-.container {
+.board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -13,4 +13,12 @@ body {
 .cell {
   background-color: lightgray;
   border: 1px solid black;
+  font-size: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell:hover {
+  background-color: grey;
 }

@@ -1,9 +1,9 @@
 // Gameboard Module (IIFE) - Since we only need one gameboard
 const Gameboard = (() => {
   const board = [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
+    ["X", "O", "X"],
+    ["X", "O", "O"],
+    ["O", "O", "X"],
   ];
 
   const getBoard = () => board;
@@ -112,7 +112,23 @@ const GameController = (() => {
 const DisplayController = (() => {
   const board = document.querySelector(".board");
   const cells = document.querySelectorAll(".cell");
-  cells.forEach((cell) => {
-    cell.addEventListener("click", GameController.playRound());
-  });
+  // cells.forEach((cell) => {
+  //   cell.addEventListener("click", GameController.playRound());
+  // });
+  const displayBoard = () => {
+    const gameBoard = Gameboard.getBoard();
+
+    let rowCounter = 0;
+    let colCounter = 0;
+    cells.forEach((cell) => {
+      cell.textContent = gameBoard[rowCounter][colCounter++];
+      if (colCounter === 3) {
+        rowCounter++;
+        colCounter = 0;
+      }
+    });
+  };
+
+  return { displayBoard };
 })();
+DisplayController.displayBoard();
